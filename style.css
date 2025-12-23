@@ -1,0 +1,762 @@
+/* --- ALAP BEÁLLÍTÁSOK ÉS VÁLTOZÓK --- */
+:root {
+    /* Színpaletta: Természetes, Zen hangulat */
+    --primary-color: #6b8e23;    /* Mély zsályazöld */
+    --accent-color: #8FBC8F;     /* Világosabb zöld */
+    --text-dark: #2C3E50;        /* Sötétkékesszürke */
+    --text-light: #F9F9F9;
+    --bg-cream: #F7F5F0;         /* Törtfehér háttér */
+    --gold: #C5A059;             /* Arany kiegészítő szín */
+    
+    /* Betűtípusok */
+    --font-main: 'Montserrat', sans-serif;
+    --font-title: 'Playfair Display', serif;
+}
+
+/* EXTRA: Egyedi szövegkijelölés színe (Zen hangulat) */
+::selection {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+body {
+    font-family: var(--font-main);
+    color: var(--text-dark);
+    line-height: 1.7;
+    background-color: #fff;
+    overflow-x: hidden;
+}
+
+/* EXTRA: Scroll Progress Bar a tetején */
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-color), var(--gold));
+    z-index: 2000;
+    transition: width 0.1s;
+    box-shadow: 0 0 10px rgba(107, 142, 35, 0.5);
+}
+
+/* EXTRA: Back to Top Gomb */
+#backToTop {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: all 0.4s ease;
+}
+
+#backToTop.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+#backToTop:hover {
+    background-color: var(--gold);
+    transform: translateY(-5px);
+}
+
+h1, h2, h3, h4 {
+    font-family: var(--font-title);
+    font-weight: 700;
+    color: var(--text-dark);
+}
+
+a {
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+ul {
+    list-style: none;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.section-padding {
+    padding: 80px 0;
+}
+
+.bg-cream {
+    background-color: var(--bg-cream);
+}
+
+.text-white h2, .text-white p {
+    color: white !important;
+}
+
+/* --- GOMBOK --- */
+.btn {
+    display: inline-block;
+    padding: 14px 35px;
+    border-radius: 50px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+    border: 2px solid var(--primary-color);
+}
+
+.btn-primary:hover {
+    background-color: transparent;
+    color: white;
+    transform: translateY(-3px); /* Extra finom mozgás */
+}
+
+.btn-outline {
+    background-color: transparent;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+}
+
+.btn-outline:hover {
+    background-color: var(--primary-color);
+    color: white;
+    transform: translateY(-3px); /* Extra finom mozgás */
+    box-shadow: 0 5px 15px rgba(107, 142, 35, 0.2);
+}
+
+/* --- NAVBAR BEÁLLÍTÁSOK --- */
+.navbar {
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: 40px;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex: 1;
+    max-width: 100%;
+    margin-left: auto;
+}
+
+/* LOGÓ KOMPOZÍCIÓ START */
+.logo-composite {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    height: 80px;
+    flex-shrink: 0;
+}
+
+.logo-img-box {
+    background-image: url('pictures/logo_3v2.png'); 
+    background-size: cover;       
+    background-position: center;  
+    height: 100%;                 
+    width: 240px;                 
+    position: relative;
+    display: flex;
+    align-items: center;          
+    justify-content: flex-end;    
+    padding-right: 20px;          
+    border-top-right-radius: 40px; 
+    border-bottom-right-radius: 40px;
+    margin-right: 15px;
+}
+
+.zen-text {
+    font-family: var(--font-title);
+    font-size: 2.8rem;   
+    font-weight: 700;    
+    color: #1a2633;      
+    text-shadow: 0px 0px 5px rgba(255,255,255,0.7);
+    line-height: 1;
+}
+/* LOGÓ KOMPOZÍCIÓ END */
+
+.nav-links {
+    display: flex;
+    align-items: center;
+}
+
+.nav-links li {
+    margin-left: 30px;
+}
+
+.nav-links a {
+    color: var(--text-dark);
+    font-weight: 500;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    position: relative;
+}
+
+.nav-links a:not(.flag-container a):not(.logo-composite):after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: var(--primary-color);
+    transition: width 0.3s;
+}
+
+.nav-links a:not(.logo-composite):hover:after {
+    width: 100%;
+}
+
+/* Zászlók */
+.flag-container {
+    display: flex;
+    gap: 10px;
+    padding-left: 20px;
+    border-left: 1px solid #ddd;
+}
+
+.flag-container img {
+    width: 24px;
+    height: auto;
+    border-radius: 2px;
+    transition: transform 0.2s;
+}
+
+.flag-container a:hover img {
+    transform: scale(1.1);
+}
+
+/* Hamburger ikon */
+.burger {
+    display: none;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.burger div {
+    width: 25px;
+    height: 3px;
+    background-color: var(--text-dark);
+    margin: 5px;
+    transition: all 0.3s ease;
+}
+
+/* --- HERO SZEKCIÓ --- */
+.hero-section {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.hero-slider {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    animation: slideAnimation 15s infinite;
+}
+
+.slide1 { background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('pictures/imake1.jpg'); animation-delay: 0s; }
+.slide2 { background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('pictures/imake2.jpg'); animation-delay: 5s; }
+.slide3 { background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('pictures/imake4.jpg'); animation-delay: 10s; }
+
+@keyframes slideAnimation {
+    0% { opacity: 0; transform: scale(1); }
+    10% { opacity: 1; }
+    33% { opacity: 1; transform: scale(1.05); } 
+    43% { opacity: 0; }
+    100% { opacity: 0; }
+}
+
+.hero-strip-wrapper {
+    width: 100%;
+    position: relative;
+    z-index: 10;
+}
+
+.hero-green-strip {
+    background-color: rgba(107, 142, 35, 0.85);
+    width: 100%;
+    padding: 40px 0;
+    text-align: center;
+    color: white;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.hero-green-strip h1 {
+    font-family: 'Cinzel Decorative', cursive;
+    font-size: 3.5rem;
+    color: white;
+    margin: 0;
+    font-weight: 700;
+    letter-spacing: 2px;
+    line-height: 1.2;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.hero-green-strip .motto {
+    font-family: var(--font-main);
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    margin-top: 15px;
+    opacity: 0.95;
+    font-weight: 400;
+}
+
+/* EXTRA: Scroll Down Indicator Stílus */
+.scroll-down-indicator {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    opacity: 0.8;
+}
+
+.mouse {
+    width: 26px;
+    height: 40px;
+    border: 2px solid white;
+    border-radius: 20px;
+    position: relative;
+    margin-bottom: 5px;
+}
+
+.wheel {
+    width: 2px;
+    height: 8px;
+    background: white;
+    position: absolute;
+    top: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 2px;
+    animation: scrollWheel 2s infinite;
+}
+
+.arrows span {
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-bottom: 2px solid white;
+    border-right: 2px solid white;
+    transform: rotate(45deg);
+    margin: -3px auto;
+    animation: arrowScroll 2s infinite;
+}
+
+.arrows .span1 { animation-delay: .1s; }
+.arrows .span2 { animation-delay: .2s; }
+.arrows .span3 { animation-delay: .3s; }
+
+@keyframes scrollWheel {
+    0% { opacity: 1; top: 6px; }
+    100% { opacity: 0; top: 18px; }
+}
+
+@keyframes arrowScroll {
+    0% { opacity: 0; }
+    50% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+/* --- ÜDVÖZLŐ SZEKCIÓ --- */
+.welcome-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+}
+
+.welcome-text {
+    flex: 1;
+}
+
+.sub-title {
+    color: var(--primary-color);
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.welcome-text h2 {
+    font-size: 2.5rem;
+    margin-bottom: 25px;
+}
+
+.welcome-text p {
+    margin-bottom: 20px;
+    color: #666;
+}
+
+.signature {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.3rem;
+    color: var(--primary-color);
+    margin-top: 30px;
+}
+
+.welcome-image {
+    flex: 1;
+    position: relative;
+}
+
+.welcome-image img {
+    width: 100%;
+    border-radius: 5px;
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.image-border {
+    position: absolute;
+    top: 20px;
+    right: -20px;
+    width: 100%;
+    height: 100%;
+    border: 3px solid var(--primary-color);
+    z-index: 1;
+    border-radius: 5px;
+}
+
+/* --- SZOLGÁLTATÁSOK --- */
+.parallax-section {
+    background-image: url('https://images.unsplash.com/photo-1540555700478-4be289fbecef?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 100px 0;
+    position: relative;
+}
+
+@media (hover: none) {
+    .parallax-section {
+        background-attachment: scroll;
+    }
+}
+
+.overlay-dark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.65);
+}
+
+.relative-z {
+    position: relative;
+    z-index: 2;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.section-header h2 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.service-card {
+    background: white;
+    padding: 40px 30px;
+    border-radius: 4px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+}
+
+.service-card .icon {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+}
+
+.service-card h3 {
+    margin-bottom: 15px;
+    font-size: 1.4rem;
+}
+
+.service-card p {
+    color: #666;
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+}
+
+.price-tag {
+    display: inline-block;
+    padding: 8px 15px;
+    background-color: var(--bg-cream);
+    color: var(--primary-color);
+    font-weight: 600;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    transition: background 0.3s ease;
+}
+
+.service-card:hover .price-tag {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+/* --- KAPCSOLAT --- */
+.contact-wrapper {
+    display: flex;
+    gap: 40px;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+}
+
+.contact-card {
+    flex: 1;
+    padding: 40px;
+    background: var(--bg-cream);
+}
+
+.contact-card h3 {
+    margin-bottom: 30px;
+}
+
+.contact-list li {
+    display: flex;
+    margin-bottom: 25px;
+}
+
+.contact-list i {
+    color: var(--primary-color);
+    font-size: 1.2rem;
+    margin-right: 20px;
+    margin-top: 5px;
+}
+
+.contact-list strong {
+    color: var(--text-dark);
+}
+
+.contact-list a {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.map-card {
+    flex: 1;
+    min-height: 400px;
+}
+
+/* --- FOOTER --- */
+footer {
+    background-color: #222;
+    color: #888;
+    text-align: center;
+    padding: 30px 0;
+    font-size: 0.9rem;
+}
+
+/* EXTRA: Footer Heart Animation */
+.footer-heart {
+    color: #e74c3c;
+    display: inline-block;
+    animation: heartBeat 1.5s infinite;
+    margin-left: 5px;
+}
+
+@keyframes heartBeat {
+    0% { transform: scale(1); }
+    14% { transform: scale(1.3); }
+    28% { transform: scale(1); }
+    42% { transform: scale(1.3); }
+    70% { transform: scale(1); }
+}
+
+/* --- ANIMÁCIÓK --- */
+.hidden-element {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 1s ease-out;
+}
+
+.show-element {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.animate-hero {
+    animation: fadeInScale 1.5s ease-out forwards;
+}
+
+@keyframes fadeInScale {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* --- RESZPONZÍV BEÁLLÍTÁSOK --- */
+@media (max-width: 992px) {
+    .welcome-wrapper {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .image-border { display: none; }
+    .hero-green-strip h1 { font-size: 3rem; }
+    .contact-wrapper { flex-direction: column; }
+    .map-card { height: 350px; }
+}
+
+@media (max-width: 768px) {
+    body { overflow-x: hidden; }
+
+    .logo-img-box {
+        width: 180px; 
+    }
+    .zen-text {
+        font-size: 2.2rem;
+    }
+    
+    /* Fontos: Mobilon a burger menüt jobbra kell tartani */
+    .nav-container {
+        justify-content: flex-end;
+        padding-right: 0;
+    }
+
+    .burger { display: block; }
+
+    .nav-links {
+        position: absolute;
+        right: 0px;
+        height: 92vh;
+        top: 80px;
+        background-color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        width: 60%;
+        transform: translateX(100%);
+        transition: transform 0.5s ease-in;
+        box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+        padding-top: 50px;
+    }
+
+    .nav-links li {
+        margin: 20px 0;
+        opacity: 0; 
+        animation: navLinkFade 0.5s ease forwards 0.3s;
+    }
+
+    .nav-links a { font-size: 1.1rem; }
+
+    .flag-container {
+        padding-left: 0;
+        border-left: none;
+        margin-top: 20px;
+    }
+
+    .nav-active { transform: translateX(0%); }
+
+    .toggle .line1 { transform: rotate(-45deg) translate(-5px, 6px); }
+    .toggle .line2 { opacity: 0; }
+    .toggle .line3 { transform: rotate(45deg) translate(-5px, -6px); }
+
+    .hero-green-strip { padding: 20px 10px; }
+    .hero-green-strip h1 { font-size: 2.2rem; letter-spacing: 1px; }
+    .hero-green-strip .motto { font-size: 0.9rem; letter-spacing: 2px; }
+    .section-header h2 { font-size: 2rem; }
+
+    .contact-wrapper { display: flex; flex-direction: column; height: auto; }
+    .contact-card { padding: 30px 20px; width: 100%; }
+
+    .map-card {
+        width: 100%;          
+        height: 450px;        
+        min-height: 450px;    
+        display: block;      
+        position: relative;   
+    }
+    .map-card iframe {
+        position: absolute;
+        top: 0; left: 0; width: 100% !important; height: 100% !important; border: 0;
+    }
+    
+    /* Mobilon elrejthetjük az animált egeret, ha zavaró, de itt hagyom */
+    .scroll-down-indicator { bottom: 80px; }
+}
+
+@keyframes navLinkFade {
+    from { opacity: 0; transform: translateX(50px); }
+    to { opacity: 1; transform: translateX(0px); }
+}
