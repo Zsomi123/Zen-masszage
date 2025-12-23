@@ -188,6 +188,28 @@ ul {
     flex-shrink: 0;
 }
 
+.logo-subtitle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    line-height: 1.1;
+    color: var(--text-dark); /* Vagy használhatod a #1a2633-at, ha sötétebbet szeretnél */
+    font-family: var(--font-title);
+    font-weight: 600;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-right: 15px; /* Kis térköz a jobb oldali menütől */
+}
+
+/* Mobilon kicsit kisebb legyen a szöveg, hogy elférjen */
+@media (max-width: 768px) {
+    .logo-subtitle {
+        font-size: 0.9rem;
+        margin-right: 5px;
+    }
+}
+
 .logo-img-box {
     background-image: url('pictures/logo_3v2.png'); 
     background-size: cover;       
