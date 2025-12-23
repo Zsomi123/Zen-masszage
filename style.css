@@ -594,6 +594,133 @@ ul {
     color: white;
 }
 
+/* --- BEMUTATKOZÁS & CSAPAT SZEKCIÓ (3 Főre optimalizálva) --- */
+.experience-wrapper {
+    display: flex;
+    align-items: center; /* Vagy 'flex-start', ha a szöveg rövid */
+    gap: 40px; /* Kicsit szűkebb hézag, hogy több hely maradjon a kártyáknak */
+}
+
+/* Bal oldal: Szöveg */
+.experience-content {
+    flex: 0.8; /* Kicsit keskenyebb szöveges rész */
+    position: relative;
+}
+
+.badge-31 {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--primary-color);
+    color: white;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+    box-shadow: 0 5px 15px rgba(107, 142, 35, 0.4);
+    border: 3px solid white;
+}
+
+.badge-31 .number {
+    font-size: 2rem;
+    font-weight: 900;
+    font-family: var(--font-title);
+    line-height: 1;
+}
+
+.badge-31 .text {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    line-height: 1.1;
+    text-align: center;
+}
+
+/* Jobb oldal: Csapat Grid */
+.team-grid {
+    flex: 1.4; /* Több helyet adunk a 3 kártyának */
+    display: grid;
+    /* Fontos: minmax 220px, hogy 3 db elférjen 1200px-es containerben is */
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); 
+    gap: 20px;
+}
+
+.team-card {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease;
+    text-align: center;
+}
+
+.team-card:hover {
+    transform: translateY(-10px);
+}
+
+.team-img {
+    width: 100%;
+    height: 220px; /* Kicsit alacsonyabb kép, hogy kompakt legyen */
+    overflow: hidden;
+}
+
+.team-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.team-card:hover .team-img img {
+    transform: scale(1.1);
+}
+
+.team-info {
+    padding: 20px;
+}
+
+.team-info h3 {
+    color: var(--text-dark);
+    margin-bottom: 5px;
+    font-size: 1.15rem; /* Kicsit kisebb betűméret */
+}
+
+.team-info .role {
+    display: block;
+    color: var(--primary-color);
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+.team-info p {
+    font-size: 0.85rem;
+    color: #666;
+    line-height: 1.5;
+}
+
+/* Reszponzív nézet */
+@media (max-width: 992px) {
+    .experience-wrapper {
+        flex-direction: column;
+    }
+    
+    .experience-content {
+        text-align: center;
+        margin-bottom: 40px;
+        flex: 1;
+        width: 100%;
+    }
+    
+    .team-grid {
+        width: 100%;
+        /* Mobilon 1 vagy 2 oszlop legyen, ne 3 zsúfolva */
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); 
+    }
+}
+
 /* --- KAPCSOLAT --- */
 .contact-wrapper {
     display: flex;
@@ -649,6 +776,10 @@ footer {
     font-size: 0.9rem;
 }
 
+footer a:hover {
+    color: var(--primary-color) !important;
+}
+
 /* EXTRA: Footer Heart Animation */
 .footer-heart {
     color: #e74c3c;
@@ -663,158 +794,6 @@ footer {
     28% { transform: scale(1); }
     42% { transform: scale(1.3); }
     70% { transform: scale(1); }
-}
-
-/* --- HARMONIKA LISTA (Szélesebb, bal kép, jobb szöveg, lenti ár) --- */
-.services-list {
-    max-width: 1000px; /* Megnövelt szélesség */
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.list-item {
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-    overflow: hidden;
-    transition: all 0.3s ease;
-    border-left: 5px solid transparent;
-}
-
-.list-item.active {
-    border-left: 5px solid var(--primary-color);
-    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-}
-
-/* FEJLÉC */
-.list-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 20px 30px;
-    cursor: pointer;
-    background: white;
-}
-
-.header-content {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-
-.list-icon {
-    font-size: 1.8rem;
-    color: var(--primary-color);
-    width: 40px;
-    text-align: center;
-}
-
-.list-header h3 {
-    margin: 0;
-    font-size: 1.2rem;
-    color: var(--text-dark);
-}
-
-.toggle-icon {
-    color: #aaa;
-    transition: transform 0.3s ease;
-    font-size: 1.1rem;
-}
-
-.list-item.active .toggle-icon {
-    transform: rotate(180deg);
-    color: var(--primary-color);
-}
-
-/* LENYÍLÓ TARTALOM */
-.list-details {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.4s ease-out;
-    background-color: #fcfcfc;
-    border-top: 1px solid #f0f0f0;
-}
-
-.details-inner {
-    padding: 30px;
-    display: flex;
-    flex-direction: column; /* Egymás alá rendezzük a tartalom-sort és az ár-sort */
-    gap: 25px;
-}
-
-/* Felső sáv: Kép (bal) + Szöveg (jobb) */
-.details-top-row {
-    display: flex;
-    gap: 30px;
-    align-items: flex-start;
-}
-
-.details-image-col {
-    width: 300px; /* Szélesebb kép a nagyobb doboz miatt */
-    flex-shrink: 0;
-}
-
-.details-image-col img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 8px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-}
-
-.details-text-col {
-    flex: 1;
-}
-
-.details-text-col p {
-    margin: 0;
-    color: #555;
-    line-height: 1.8;
-    font-size: 1rem;
-}
-
-/* Alsó sáv: Ár (Középen) */
-.price-row {
-    display: flex;
-    justify-content: center; /* Középre igazítás */
-    width: 100%;
-    padding-top: 20px;
-    border-top: 1px dashed #eee; /* Finom elválasztó vonal */
-}
-
-.price-box {
-    background-color: white;
-    padding: 12px 40px; /* Szélesebb gomb */
-    border-radius: 50px;
-    border: 1px solid var(--primary-color);
-    color: var(--primary-color);
-    font-weight: 700;
-    font-size: 1.1rem;
-    box-shadow: 0 4px 10px rgba(107, 142, 35, 0.15);
-    transition: all 0.3s ease;
-}
-
-.price-box:hover {
-    background-color: var(--primary-color);
-    color: white;
-}
-
-/* Mobil nézet */
-@media (max-width: 768px) {
-    .details-top-row {
-        flex-direction: column; /* Mobilon kép felül, szöveg alatta */
-    }
-    
-    .details-image-col {
-        width: 100%;
-        margin-bottom: 15px;
-    }
-    
-    .details-inner {
-        padding: 20px;
-    }
 }
 
 /* --- ANIMÁCIÓK --- */
@@ -926,7 +905,6 @@ footer {
         top: 0; left: 0; width: 100% !important; height: 100% !important; border: 0;
     }
     
-    /* Mobilon elrejthetjük az animált egeret, ha zavaró, de itt hagyom */
     .scroll-down-indicator { bottom: 80px; }
 }
 
