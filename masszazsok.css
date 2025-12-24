@@ -4,15 +4,75 @@ main {
 }
 
 /* --- HERO SZEKCIÓ (MASSZÁZS FŐKÉP) --- */
+/* --- 1. HERO SZEKCIÓ RÖGZÍTÉSE --- */
 .masszazs-hero {
-    position: relative;
-    height: 50vh;
+    position: fixed;  /* Ez a kulcs: rögzítjük a képernyőhöz */
+    top: 78px;        /* A menü magassága alá igazítjuk (ha a menü fixed) */
+    left: 0;
+    width: 100%;
+    height: 50vh;     /* Fix magasság */
     min-height: 400px;
+    z-index: 1;       /* Alacsony szint, hogy a lista fölé menjen */
+    
+    /* A flexbox marad a középre igazításhoz */
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    margin-bottom: 0;
+}
+
+/* --- 2. TARTALOM (LISTA) IGAZÍTÁSA --- */
+/* Ez a szekció tartalmazza a listát. Ennek kell "rámennie" a hero-ra. */
+.section-padding.bg-cream {
+    position: relative; /* Hogy a z-index működjön */
+    z-index: 10;        /* Magasabb, mint a hero, így eltakarja azt */
+    
+    /* FONTOS: Mivel a hero 'fixed', nem foglal helyet. 
+       Ezért manuálisan toljuk le a tartalmat a hero magasságával. */
+    margin-top: 50vh;   
+    
+    /* Háttérszín kötelező! Ha átlátszó, átlátszik alatta a cím. 
+       A bg-cream színét használjuk (vagy fehéret). */
+    background-color: #F7F5F0; 
+    
+    /* Egy kis extra padding, hogy szép legyen az alja */
+    padding-bottom: 50px;
+}
+
+/* --- 3. LISTA POZÍCIÓ FINOMHANGOLÁS --- */
+.services-list {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    
+    /* Itt állítjuk be, mennyire lógjon bele alapból a képbe.
+       A -100px azt jelenti, hogy induláskor kicsit már takarja az alját. */
+    margin-top: -100px; 
+    
+    position: relative;
+    z-index: 20;
+}
+
+/* --- 4. MOBIL OPTIMALIZÁLÁS (iPhone fix) --- */
+@media (max-width: 768px) {
+    /* Mobilon a hero kisebb */
+    .masszazs-hero {
+        height: 40vh;
+        min-height: 300px;
+        top: 78px; /* Ha a mobil menü is ennyi magas */
+    }
+
+    /* A tartalom kezdőpontját is igazítani kell a kisebb hero-hoz */
+    .section-padding.bg-cream {
+        margin-top: 40vh; /* Ugyanannyi, mint a hero magassága mobilon */
+    }
+    
+    /* Mobilon ne lógjon bele annyira a képbe, vagy semennyire */
+    .services-list {
+        margin-top: -50px; 
+    }
 }
 
 /* Gradiens maszk a hero kép felett */
