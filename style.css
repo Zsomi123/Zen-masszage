@@ -138,7 +138,7 @@ ul {
 .btn-primary:hover {
     background-color: transparent;
     color: white;
-    transform: translateY(-3px); /* Extra finom mozgás */
+    transform: translateY(-3px);
 }
 
 .btn-outline {
@@ -150,7 +150,7 @@ ul {
 .btn-outline:hover {
     background-color: var(--primary-color);
     color: white;
-    transform: translateY(-3px); /* Extra finom mozgás */
+    transform: translateY(-3px);
     box-shadow: 0 5px 15px rgba(107, 142, 35, 0.2);
 }
 
@@ -193,21 +193,13 @@ ul {
     flex-direction: column;
     justify-content: center;
     line-height: 1.1;
-    color: var(--text-dark); /* Vagy használhatod a #1a2633-at, ha sötétebbet szeretnél */
+    color: var(--text-dark);
     font-family: var(--font-title);
     font-weight: 600;
     font-size: 1.1rem;
     text-transform: uppercase;
     letter-spacing: 1px;
-    margin-right: 15px; /* Kis térköz a jobb oldali menütől */
-}
-
-/* Mobilon kicsit kisebb legyen a szöveg, hogy elférjen */
-@media (max-width: 768px) {
-    .logo-subtitle {
-        font-size: 0.9rem;
-        margin-right: 5px;
-    }
+    margin-right: 15px;
 }
 
 .logo-img-box {
@@ -544,8 +536,17 @@ ul {
 
 .services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    /* Mobilon és kisebb tableten marad a rugalmas elrendezés (egymás alatt vagy 2-esével) */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 30px;
+    justify-content: center;
+}
+
+/* Asztali nézetben (1024px felett) kényszerítjük a 3 oszlopot */
+@media (min-width: 1024px) {
+    .services-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
 }
 
 .service-card {
@@ -594,16 +595,15 @@ ul {
     color: white;
 }
 
-/* --- BEMUTATKOZÁS & CSAPAT SZEKCIÓ (3 Főre optimalizálva) --- */
+/* --- BEMUTATKOZÁS & CSAPAT SZEKCIÓ --- */
 .experience-wrapper {
     display: flex;
-    align-items: center; /* Vagy 'flex-start', ha a szöveg rövid */
-    gap: 40px; /* Kicsit szűkebb hézag, hogy több hely maradjon a kártyáknak */
+    align-items: center; 
+    gap: 40px; 
 }
 
-/* Bal oldal: Szöveg */
 .experience-content {
-    flex: 0.8; /* Kicsit keskenyebb szöveges rész */
+    flex: 0.8; 
     position: relative;
 }
 
@@ -636,11 +636,9 @@ ul {
     text-align: center;
 }
 
-/* Jobb oldal: Csapat Grid */
 .team-grid {
-    flex: 1.4; /* Több helyet adunk a 3 kártyának */
+    flex: 1.4; 
     display: grid;
-    /* Fontos: minmax 220px, hogy 3 db elférjen 1200px-es containerben is */
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); 
     gap: 20px;
 }
@@ -660,7 +658,7 @@ ul {
 
 .team-img {
     width: 100%;
-    height: 220px; /* Kicsit alacsonyabb kép, hogy kompakt legyen */
+    height: 220px; 
     overflow: hidden;
 }
 
@@ -682,7 +680,7 @@ ul {
 .team-info h3 {
     color: var(--text-dark);
     margin-bottom: 5px;
-    font-size: 1.15rem; /* Kicsit kisebb betűméret */
+    font-size: 1.15rem; 
 }
 
 .team-info .role {
@@ -699,26 +697,6 @@ ul {
     font-size: 0.85rem;
     color: #666;
     line-height: 1.5;
-}
-
-/* Reszponzív nézet */
-@media (max-width: 992px) {
-    .experience-wrapper {
-        flex-direction: column;
-    }
-    
-    .experience-content {
-        text-align: center;
-        margin-bottom: 40px;
-        flex: 1;
-        width: 100%;
-    }
-    
-    .team-grid {
-        width: 100%;
-        /* Mobilon 1 vagy 2 oszlop legyen, ne 3 zsúfolva */
-        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); 
-    }
 }
 
 /* --- KAPCSOLAT --- */
@@ -780,7 +758,6 @@ footer a:hover {
     color: var(--primary-color) !important;
 }
 
-/* EXTRA: Footer Heart Animation */
 .footer-heart {
     color: #e74c3c;
     display: inline-block;
@@ -817,30 +794,22 @@ footer a:hover {
     to { opacity: 1; transform: scale(1); }
 }
 
-/* --- RESZPONZÍV BEÁLLÍTÁSOK --- */
-@media (max-width: 992px) {
-    .welcome-wrapper {
-        flex-direction: column;
-        text-align: center;
-    }
-    
-    .image-border { display: none; }
-    .hero-green-strip h1 { font-size: 3rem; }
-    .contact-wrapper { flex-direction: column; }
-    .map-card { height: 350px; }
+.toggle .line1 { transform: rotate(-45deg) translate(-5px, 6px); }
+.toggle .line2 { opacity: 0; }
+.toggle .line3 { transform: rotate(45deg) translate(-5px, -6px); }
+
+@keyframes navLinkFade {
+    from { opacity: 0; transform: translateX(50px); }
+    to { opacity: 1; transform: translateX(0px); }
 }
 
-@media (max-width: 768px) {
-    body { overflow-x: hidden; }
+/* ------------------------------------------------ */
+/* --- RESZPONZÍV BEÁLLÍTÁSOK (MEDIA QUERIES) --- */
+/* ------------------------------------------------ */
 
-    .logo-img-box {
-        width: 180px; 
-    }
-    .zen-text {
-        font-size: 2.2rem;
-    }
-    
-    /* Fontos: Mobilon a burger menüt jobbra kell tartani */
+/* 1. TABLET ÉS KIS LAPTOP (1024px alatt) */
+@media (max-width: 1024px) {
+    /* MENÜ ÁTVÁLTÁSA: 1024px-nél bekapcsol a burger menü, mert a sima menü már nem férne el */
     .nav-container {
         justify-content: flex-end;
         padding-right: 0;
@@ -858,7 +827,7 @@ footer a:hover {
         flex-direction: column;
         align-items: center;
         justify-content: flex-start;
-        width: 60%;
+        width: 50%; /* Tableten fél képernyő */
         transform: translateX(100%);
         transition: transform 0.5s ease-in;
         box-shadow: -2px 0 10px rgba(0,0,0,0.1);
@@ -866,12 +835,14 @@ footer a:hover {
     }
 
     .nav-links li {
-        margin: 20px 0;
+        margin: 25px 0;
         opacity: 0; 
         animation: navLinkFade 0.5s ease forwards 0.3s;
     }
 
     .nav-links a { font-size: 1.1rem; }
+
+    .nav-active { transform: translateX(0%); }
 
     .flag-container {
         padding-left: 0;
@@ -879,36 +850,101 @@ footer a:hover {
         margin-top: 20px;
     }
 
-    .nav-active { transform: translateX(0%); }
+    /* Kisebb logó tableten */
+    .logo-img-box {
+        width: 200px;
+    }
+    .zen-text {
+        font-size: 2.4rem;
+    }
 
-    .toggle .line1 { transform: rotate(-45deg) translate(-5px, 6px); }
-    .toggle .line2 { opacity: 0; }
-    .toggle .line3 { transform: rotate(45deg) translate(-5px, -6px); }
+    /* Container margók igazítása */
+    .container {
+        padding: 0 30px;
+    }
+}
+
+/* 2. ÁLLÓ TABLET (992px alatt) - Layoutok oszloposítása */
+@media (max-width: 992px) {
+    /* Fő szekciók egymás alá rendezése */
+    .welcome-wrapper {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .experience-wrapper {
+        flex-direction: column;
+    }
+    
+    .contact-wrapper {
+        flex-direction: column;
+    }
+
+    .welcome-image {
+        margin-top: 40px;
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .image-border { display: none; } /* Keret eltüntetése kisebb kijelzőn */
+
+    .hero-green-strip h1 { font-size: 3rem; }
+    
+    .experience-content {
+        text-align: center;
+        margin-bottom: 40px;
+        width: 100%;
+    }
+    
+    .team-grid {
+        width: 100%;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); 
+    }
+
+    .map-card { height: 350px; width: 100%; }
+}
+
+/* 3. MOBIL (768px alatt) */
+@media (max-width: 768px) {
+    body { overflow-x: hidden; }
+
+    .nav-links {
+        width: 70%; /* Mobilon szélesebb menü */
+    }
+
+    .logo-img-box {
+        width: 180px; 
+    }
+    .zen-text {
+        font-size: 2.2rem;
+    }
+    
+    /* Logó szöveg mobilon kisebb */
+    .logo-subtitle {
+        font-size: 0.85rem;
+    }
 
     .hero-green-strip { padding: 20px 10px; }
     .hero-green-strip h1 { font-size: 2.2rem; letter-spacing: 1px; }
     .hero-green-strip .motto { font-size: 0.9rem; letter-spacing: 2px; }
     .section-header h2 { font-size: 2rem; }
 
-    .contact-wrapper { display: flex; flex-direction: column; height: auto; }
     .contact-card { padding: 30px 20px; width: 100%; }
 
+    .welcome-image { width: 100%; }
+
     .map-card {
-        width: 100%;          
         height: 450px;        
         min-height: 450px;    
         display: block;      
         position: relative;   
     }
+    
     .map-card iframe {
         position: absolute;
         top: 0; left: 0; width: 100% !important; height: 100% !important; border: 0;
     }
     
     .scroll-down-indicator { bottom: 80px; }
-}
-
-@keyframes navLinkFade {
-    from { opacity: 0; transform: translateX(50px); }
-    to { opacity: 1; transform: translateX(0px); }
 }

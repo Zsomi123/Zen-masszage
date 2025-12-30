@@ -1,0 +1,299 @@
+/* --- ALAP IGAZÍTÁS --- */
+main {
+    padding-top: 78px;
+}
+
+/* --- HERO SZEKCIÓ (Megtartottuk a stílust) --- */
+.csontkovacs-hero {
+    position: relative;
+    height: 55vh; /* Kicsit magasabb, hogy szép legyen az átfedés */
+    min-height: 450px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    margin-bottom: 0;
+}
+
+.csontkovacs-hero::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Ez a masszázsok.css-ből áthozott krémszínű átmenet: */
+    background: linear-gradient(to bottom, 
+        transparent 0%,
+        transparent 30%,
+        rgba(247, 245, 240, 0.4) 60%,
+        #F7F5F0 100%
+    );
+    z-index: 5;
+    pointer-events: none;
+}
+
+.csontkovacs-hero .hero-content {
+    z-index: 10;
+    text-align: center;
+    width: 100%;
+    padding: 0 20px;
+    margin-top: -40px; /* Hogy feljebb legyen a szöveg */
+}
+
+/* Slider Animáció */
+.hero-slider { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+.slide-bg {
+    position: absolute; width: 100%; height: 100%;
+    background-size: cover; background-position: center;
+    opacity: 0; animation: slideAnimation 15s infinite;
+}
+.s1 { animation-delay: 0s; }
+.s2 { animation-delay: 7.5s; } /* 2 képre osztva */
+
+/* Page Header */
+/* Page Header - Masszázs stílusra igazítva */
+.page-header {
+    text-align: center;
+    animation: fadeIn 1s ease-out;
+    margin-bottom: 0;
+}
+
+.page-header h1 {
+    font-family: 'Cinzel Decorative', cursive;
+    font-size: 3.5rem; /* 3.8rem helyett 3.5rem */
+    color: #2c3e50;
+    margin: 0;
+    font-weight: 400; /* 700 helyett 400 (vékonyabb) */
+    line-height: 1.2;
+}
+
+.page-header .sub-title {
+    display: block;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9rem; /* 1rem helyett 0.9rem */
+    text-transform: uppercase;
+    letter-spacing: 3px; /* 4px helyett 3px */
+    color: #888;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.page-header .separator-line {
+    width: 80px; /* 100px helyett 80px */
+    height: 3px;
+    background-color: var(--primary-color, #6b8e23);
+    margin: 20px auto 0;
+    border-radius: 2px;
+    position: relative;
+}
+
+/* Ez a rész adja hozzá a hiányzó ikont/pöttyöt a vonal közepére */
+.page-header .separator-line::after {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: var(--primary-color, #6b8e23);
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 3px solid #fcfcfc; /* Ez hozza létre a "hézagot" a pötty körül */
+}
+
+/* --- SINGLE FEATURE CARD (A "Nagy Div") --- */
+.full-view-section {
+    padding-top: 0 !important; /* Hogy felcsússzon */
+    padding-bottom: 80px;
+}
+
+.single-feature-card {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+    display: flex;
+    overflow: hidden;
+    position: relative;
+    z-index: 20;
+    margin-top: -120px; /* Ez húzza fel a Hero képre */
+    min-height: 600px;
+}
+
+/* Bal oldal: Kép doboz */
+.feature-image-box {
+    flex: 1;
+    position: relative;
+    min-height: 400px;
+}
+
+.feature-image-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Kép fölötti kis badge */
+.image-overlay-text {
+    position: absolute;
+    bottom: 30px;
+    left: 30px;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(5px);
+    padding: 10px 20px;
+    border-radius: 50px;
+    color: var(--primary-color, #6b8e23);
+    font-weight: 600;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Jobb oldal: Tartalom */
+.feature-content-box {
+    flex: 1.2;
+    padding: 60px 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.feature-content-box h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    color: var(--text-dark, #2C3E50);
+    margin-bottom: 10px;
+    line-height: 1.2;
+}
+
+.highlight-subtitle {
+    display: block;
+    color: var(--primary-color, #6b8e23);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.9rem;
+    margin-bottom: 30px;
+}
+
+.text-body p {
+    color: #555;
+    margin-bottom: 20px;
+    font-size: 1.05rem;
+    line-height: 1.8;
+}
+
+/* Lista pontok stílusa */
+.feature-points {
+    margin: 25px 0;
+    list-style: none;
+}
+
+.feature-points li {
+    margin-bottom: 12px;
+    font-size: 1rem;
+    color: #444;
+    display: flex;
+    align-items: center;
+}
+
+.feature-points i {
+    color: var(--primary-color, #6b8e23);
+    margin-right: 15px;
+    background: #f0f7eb;
+    padding: 8px;
+    border-radius: 50%;
+    font-size: 0.8rem;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Árazás blokk */
+.pricing-block {
+    background: #f9f9f9;
+    border-left: 5px solid var(--primary-color, #6b8e23);
+    padding: 25px;
+    margin: 30px 0;
+    border-radius: 0 10px 10px 0;
+}
+
+.price-label {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 5px;
+}
+
+.price-amount {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-dark, #2C3E50);
+    font-family: 'Montserrat', sans-serif;
+}
+
+.price-amount .duration {
+    font-size: 1rem;
+    font-weight: 400;
+    color: #666;
+}
+
+.price-note {
+    margin-top: 5px;
+    font-size: 0.85rem;
+    color: #888;
+    font-style: italic;
+    margin-bottom: 0 !important;
+}
+
+/* Gomb */
+.action-area {
+    margin-top: 10px;
+}
+
+/* --- MOBIL / TABLET RESZPONZIVITÁS --- */
+@media (max-width: 992px) {
+    .csontkovacs-hero {
+        height: 40vh;
+    }
+
+    .single-feature-card {
+        flex-direction: column;
+        margin-top: -60px; /* Mobilon kisebb felcsúszás */
+    }
+
+    .feature-image-box {
+        height: 300px;
+        min-height: auto;
+    }
+    
+    .feature-content-box {
+        padding: 40px 30px;
+    }
+
+    .page-header h1 {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .feature-content-box {
+        padding: 30px 20px;
+    }
+    
+    .feature-content-box h2 {
+        font-size: 1.8rem;
+    }
+    
+    .price-amount {
+        font-size: 1.6rem;
+    }
+
+    .page-header h1 {
+        font-size: 2rem;
+    }
+}
