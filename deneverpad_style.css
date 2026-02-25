@@ -1,0 +1,432 @@
+/* deneverpad_style.css elejére */
+html, body {
+    overflow-x: hidden; /* Megakadályozza a vízszintes görgetést */
+}
+
+/* --- ALAP IGAZÍTÁS --- */
+main {
+    padding-top: 78px;
+}
+
+/* --- LOGÓ HOSSZÚ CSÍK KIEGÉSZÍTÉS --- */
+
+/* Az új csomagoló doboz pozicionálása */
+.logo-stripe-wrapper {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Ez biztosítja, hogy a hosszú csík ne lógjon rá a felette/alatta lévő szövegekre */
+    margin: 25px auto; 
+}
+
+/* Maga a meghosszabbított barna csík */
+.logo-stripe-wrapper::before {
+    content: '';
+    position: absolute;
+    
+    /* A csík függőleges pozíciója. 
+       A képen a vonal picit a középpont felett van, ezért 48%-ot használunk 50% helyett. */
+    top: 48%; 
+    transform: translateY(-50%);
+    
+    /* Teljes képernyő szélesség */
+    left: calc(50% - 50vw);
+    width: 100vw; 
+    
+    /* VASTAGSÁG: Itt állítottuk be a képhez passzoló méretet */
+    height: 20px; 
+    
+    /* SZÍN: Egy sötétebb barna árnyalat, ami jobban hasonlít a képen lévőre */
+    background-color: #4c341b; 
+    
+    /* A kép mögé kerüljön */
+    z-index: -1;
+}
+
+/* Kicsit módosítunk az eredeti logó stíluson, hogy passzoljon az új wrapperbe */
+.hero-logo-img {
+    /* A korábbi margin-t levesszük, mert most a wrapper kezeli */
+    margin: 0; 
+    position: relative;
+    z-index: 2; /* Biztosan a csík előtt legyen */
+    
+    /* FONTOS: Mivel a logó széle el van halványítva (mask-image), 
+       a barna csík át fog látszani a halvány részeken.
+       Ez adhat egy érdekes "ragyogás" hatást, de ha zavaró,
+       akkor ki kell venni a mask-image sorokat az előző kódodból. */
+}
+
+/* --- HERO SZEKCIÓ --- */
+.csontkovacs-hero {
+    position: relative;
+    height: 55vh;
+    min-height: 450px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    margin-bottom: 0;
+}
+
+.csontkovacs-hero::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, 
+        transparent 0%,
+        transparent 30%,
+        rgba(247, 245, 240, 0.4) 60%,
+        #F7F5F0 100%
+    );
+    z-index: 5;
+    pointer-events: none;
+}
+
+.csontkovacs-hero .hero-content {
+    z-index: 10;
+    text-align: center;
+    width: 100%;
+    padding: 0 20px;
+    margin-top: -40px;
+}
+
+/* Slider Animáció */
+.hero-slider { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+.slide-bg {
+    position: absolute; width: 100%; height: 100%;
+    background-size: cover; background-position: center;
+    opacity: 0; animation: slideAnimation 15s infinite;
+}
+.s1 { animation-delay: 0s; }
+.s2 { animation-delay: 7.5s; }
+
+/* Page Header */
+.page-header {
+    text-align: center;
+    animation: fadeIn 1s ease-out;
+    margin-bottom: 0;
+}
+
+.page-header h1 {
+    font-family: 'Cinzel Decorative', cursive;
+    font-size: 3.5rem;
+    color: #2c3e50;
+    margin: 0;
+    font-weight: 400;
+    line-height: 1.2;
+}
+
+/* ÚJ RÉSZ: A Hero logó stílusa elhalványuló szélekkel */
+.hero-logo-img {
+    max-width: 550px;
+    width: 90%;
+    height: auto;
+    display: block;
+    margin: 25px auto;
+    border-radius: 12px;
+    
+    /* Az árnyékot érdemes lehet kivenni vagy finomítani, mivel a maszk 
+       eltünteti a kép éles széleit, de meghagytam a biztonság kedvéért */
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+
+    /* --- AZ ELHALVÁNYODÓ SZÉLEK (VIGNETTE EFFEKT) --- */
+    /* A középponttól (center) kifelé haladva: 
+       50%-ig teljesen látható, majd 95%-nál már teljesen átlátszó. */
+    -webkit-mask-image: radial-gradient(ellipse at center, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 95%);
+    mask-image: radial-gradient(ellipse at center, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 95%);
+}
+
+.page-header .sub-title {
+    display: block;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: #888;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.page-header .separator-line {
+    width: 80px;
+    height: 3px;
+    background-color: var(--primary-color, #6b8e23);
+    margin: 20px auto 0;
+    border-radius: 2px;
+    position: relative;
+}
+
+.page-header .separator-line::after {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: var(--primary-color, #6b8e23);
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 3px solid #fcfcfc;
+}
+
+/* --- SINGLE FEATURE CARD --- */
+.full-view-section .container {
+    max-width: 1600px;
+    width: 98%;
+    margin: 0 auto;
+}
+
+.full-view-section {
+    padding-top: 0 !important;
+    padding-bottom: 80px;
+}
+
+.single-feature-card {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+    display: flex;
+    overflow: hidden;
+    position: relative;
+    z-index: 20;
+    margin-top: -120px;
+    align-items: stretch;
+}
+
+/* Bal oldal: Kép doboz */
+.feature-image-box {
+    flex: 1;
+    position: relative;
+    display: block; /* A flex helyett a block is tökéletes ide */
+    background: #fff;
+    overflow: hidden; /* Biztosítja, hogy semmi ne lógjon ki */
+}
+
+.feature-image-box img {
+    width: 100%;
+    height: 100%; /* auto helyett 100%, hogy kitöltse a magasságot */
+    object-fit: cover; /* contain helyett cover: ez tünteti el a fehér sávokat! */
+    object-position: center; /* Középre igazítja a vágást */
+    display: block;
+}
+
+/* Kép fölötti kis badge */
+.image-overlay-text {
+    position: absolute;
+    bottom: 30px;
+    left: 30px;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(5px);
+    padding: 10px 20px;
+    border-radius: 50px;
+    color: var(--primary-color, #6b8e23);
+    font-weight: 600;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 2;
+}
+
+/* Jobb oldal: Tartalom */
+.feature-content-box {
+    flex: 1.2;
+    padding: 60px 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.feature-content-box h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    color: var(--text-dark, #2C3E50);
+    margin-bottom: 10px;
+    line-height: 1.2;
+}
+
+.highlight-subtitle {
+    display: block;
+    color: var(--primary-color, #6b8e23);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.9rem;
+    margin-bottom: 30px;
+}
+
+.text-body p {
+    color: #555;
+    margin-bottom: 20px;
+    font-size: 1.05rem;
+    line-height: 1.8;
+}
+
+/* Lista pontok stílusa */
+.feature-points {
+    margin: 25px 0;
+    list-style: none;
+}
+
+.feature-points li {
+    margin-bottom: 12px;
+    font-size: 1rem;
+    color: #444;
+    display: flex;
+    align-items: center;
+}
+
+.feature-points i {
+    color: var(--primary-color, #6b8e23);
+    margin-right: 15px;
+    background: #f0f7eb;
+    padding: 8px;
+    border-radius: 50%;
+    font-size: 0.8rem;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Árazás blokk */
+.pricing-block {
+    background: #f9f9f9;
+    border-left: 5px solid var(--primary-color, #6b8e23);
+    padding: 25px;
+    margin: 30px 0;
+    border-radius: 0 10px 10px 0;
+}
+
+.price-label {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 5px;
+}
+
+.price-amount {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-dark, #2C3E50);
+    font-family: 'Montserrat', sans-serif;
+}
+
+.price-amount .duration {
+    font-size: 1rem;
+    font-weight: 400;
+    color: #666;
+}
+
+.price-note {
+    margin-top: 5px;
+    font-size: 0.85rem;
+    color: #888;
+    font-style: italic;
+    margin-bottom: 0 !important;
+}
+
+/* Gomb */
+.action-area {
+    margin-top: 10px;
+}
+
+/* --- ÚJ STÍLUSOK A DENEVERPAD KÉPEKHEZ --- */
+.tech-gallery {
+    margin: 30px 0;
+    padding: 20px;
+    background: #fcfcfc;
+    border-radius: 10px;
+    border: 1px solid #eee;
+}
+
+.tech-grid {
+    display: flex;
+    gap: 15px;
+    justify-content: space-between;
+}
+
+.tech-item {
+    flex: 1;
+    text-align: center;
+}
+
+.tech-item img {
+    width: 100%;
+    height: 120px;
+    object-fit: contain;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    background: white;
+    padding: 5px;
+    margin-bottom: 8px;
+    transition: transform 0.3s ease;
+}
+
+.tech-item img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.tech-item span {
+    font-size: 0.85rem;
+    color: #666;
+    font-weight: 500;
+}
+
+/* --- MOBIL / TABLET RESZPONZIVITÁS --- */
+@media (max-width: 992px) {
+    .csontkovacs-hero {
+        height: 40vh;
+    }
+
+    .single-feature-card {
+        flex-direction: column;
+        margin-top: -60px;
+    }
+
+    .feature-image-box {
+        height: auto; 
+        min-height: 300px; 
+    }
+    
+    .feature-content-box {
+        padding: 40px 30px;
+    }
+
+    .page-header h1 {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .feature-content-box {
+        padding: 30px 20px;
+    }
+    
+    .feature-content-box h2 {
+        font-size: 1.8rem;
+    }
+    
+    .price-amount {
+        font-size: 1.6rem;
+    }
+
+    .page-header h1 {
+        font-size: 2rem;
+    }
+
+    .tech-grid {
+        flex-direction: column;
+    }
+    .tech-item img {
+        height: auto;
+        max-height: 200px;
+    }
+}
