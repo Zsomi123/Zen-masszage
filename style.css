@@ -323,9 +323,10 @@ ul {
     animation: slideAnimation 15s infinite;
 }
 
-.slide1 { background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('pictures/imake1.jpg'); animation-delay: 0s; }
-.slide2 { background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('pictures/imake2.jpg'); animation-delay: 5s; }
-.slide3 { background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('pictures/imake4.jpg'); animation-delay: 10s; }
+.slide1 { background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('pictures/index_slider/imake1v2.png'); animation-delay: 0s; }
+.slide2 { background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('pictures/index_slider/Kep55v2.png'); animation-delay: 5s; }
+.slide3 { background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('pictures/index_slider/kep6.JPG'); animation-delay: 10s; }
+
 
 @keyframes slideAnimation {
     0% { opacity: 0; transform: scale(1); }
