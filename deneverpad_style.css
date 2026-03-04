@@ -171,12 +171,34 @@ main {
 }
 
 /* --- ÁRAZÁS ÉS GOMB --- */
+/* --- ÁRAZÁS ÉS GOMB --- */
 .card-footer-price {
     border-top: 1px solid #eee;
     padding-top: 30px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+/* EZT A KÉT BLOKKOT ADD HOZZÁ: */
+.price-display .label {
+    display: block;
+    font-size: 0.85rem;
+    color: #888;
+    text-transform: uppercase;
+}
+
+.price-display .amount {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #6b8e23;
+}
+
+/* EZT IS ADD HOZZÁ: */
+.price-display small {
+    font-size: 1rem;
+    color: #666;
+    font-weight: 400;
 }
 
 .price-display .amount {
@@ -232,21 +254,75 @@ main {
     animation: fadeIn 1.2s ease-out forwards;
 }
 
+/* --- RESZPONZÍV BEÁLLÍTÁSOK --- */
+
+/* TABLET NÉZET */
+@media (max-width: 992px) {
+    .content-container {
+        margin-top: -200px; /* Kicsit feljebb hozva a kártyát */
+    }
+    .csontkovacs-hero .hero-content {
+        bottom: 400px; /* Arányos távolság a kártyától */
+    }
+    .card-image-col {
+        flex: 0 0 300px; /* Tablet mérethez igazított képszélesség */
+    }
+}
+
 /* MOBIL NÉZET */
 @media (max-width: 768px) {
-    /* Új szabályok a hős-szekcióhoz, megegyezően a masszázs oldallal */
     .csontkovacs-hero {
         height: 60vh;
         min-height: 450px;
     }
     
-    .csontkovacs-hero .hero-content {
-        bottom: 250px; 
+    .content-container {
+        margin-top: -120px; /* Kisebb rácsúszás mobilon */
+        padding: 0 15px;
     }
 
-    /* Korábbi szabályaid */
-    .content-container { margin-top: -120px; }
-    .card-top-row { flex-direction: column; }
-    .card-image-col { width: 100%; flex: none; }
-    .card-footer-price { flex-direction: column; gap: 20px; text-align: center; }
+    .csontkovacs-hero .hero-content {
+        bottom: 250px; /* Szöveg/Logó pozicionálása a kártya fölé */
+    }
+
+    .card-inner {
+        padding: 25px 20px; /* Kisebb belső margó a kártyán belül */
+    }
+
+    .card-top-row {
+        flex-direction: column; /* Egymás alá kerül a kép és a szöveg */
+        gap: 20px;
+    }
+
+    .card-image-col {
+        width: 100%;
+        flex: none;
+    }
+
+    .card-image-col img {
+        height: 250px;
+        width: 100%;
+        object-fit: cover;
+        border-radius: 8px;
+    }
+
+    .card-footer-price {
+        flex-direction: column;
+        gap: 20px;
+        margin-top: 20px;
+        padding-top: 20px;
+        text-align: center;
+    }
+
+    .price-display {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+/* NAGYON KIS MOBILOK */
+@media (max-width: 480px) {
+    .csontkovacs-hero .hero-content {
+        bottom: 220px; /* Még kisebb kijelzőkhöz igazítva */
+    }
 }
