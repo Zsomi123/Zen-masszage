@@ -11,10 +11,6 @@ main {
     min-height: 550px;
     z-index: 1;
     overflow: hidden;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed; /* Parallax hatás */
 }
 
 .deneverpad-hero::after {

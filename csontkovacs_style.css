@@ -11,10 +11,18 @@ main {
     min-height: 550px;
     z-index: 1;
     overflow: hidden;
+    
+    /* Új szabályok: Háttérkép megfelelő méretezése és pozicionálása */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background-attachment: fixed; /* Parallax hatás */
+    
+    /* Új szabályok: Flexbox a szöveg rugalmas elrendezéséhez */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 250px; /* Felfelé toljuk picit a szöveget, hogy az alulról rácsúszó kártya ne takarja ki */
 }
 
 .csontkovacs-hero::after {
@@ -32,13 +40,12 @@ main {
 }
 
 .csontkovacs-hero .hero-content {
-    position: absolute;
-    bottom: 420px;
-    left: 0;
-    right: 0;
+    /* position: absolute; és a bottom érték TÖRLÉSRE került */
+    position: relative;
     z-index: 10;
     text-align: center;
     padding: 0 20px;
+    width: 100%;
 }
 
 /* --- FEJLÉC --- */
@@ -207,13 +214,15 @@ main {
 
 /* --- RESZPONZÍVITÁS (KÉP ALULRA CSÚSZTATÁSA MOBILON) --- */
 
+/* --- RESZPONZÍVITÁS (KÉP ALULRA CSÚSZTATÁSA MOBILON) --- */
+
 /* TABLET NÉZET */
 @media (max-width: 992px) {
     .content-container { margin-top: -200px; }
-    .csontkovacs-hero .hero-content { bottom: 350px; }
+    .csontkovacs-hero { padding-bottom: 200px; } /* Kisebb helyhagyás alul a szövegnek */
     
     .card-top-row { 
-        flex-direction: column-reverse; /* Kép kerül alulra */
+        flex-direction: column-reverse; 
         gap: 30px; 
     }
     .card-image-col { 
@@ -227,13 +236,12 @@ main {
 
 /* MOBIL NÉZET */
 @media (max-width: 768px) {
-    .csontkovacs-hero { height: 60vh; }
+    .csontkovacs-hero { height: 60vh; padding-bottom: 120px; } /* Még kisebb helyhagyás */
     .content-container { margin-top: -120px; }
-    .csontkovacs-hero .hero-content { bottom: 220px; }
     .card-inner { padding: 30px 20px; }
     
     .card-top-row { 
-        flex-direction: column-reverse; /* Kép kerül alulra */
+        flex-direction: column-reverse; 
         gap: 20px; 
     }
     .card-image-col { 
@@ -246,7 +254,6 @@ main {
     }
     .price-display { text-align: center; }
 }
-
 /* ANIMÁCIÓK */
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(20px); }

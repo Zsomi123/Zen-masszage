@@ -11,10 +11,18 @@ main {
     min-height: 550px;
     z-index: 1;
     overflow: hidden;
+    
+    /* Új szabályok: Háttérkép megfelelő méretezése és pozicionálása */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background-attachment: fixed; /* Parallax hatás */
+    
+    /* Új szabályok: Flexbox a szöveg rugalmas elrendezéséhez */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 250px; /* Felfelé toljuk picit a szöveget, hogy a kártya ne takarja ki */
 }
 
 .pedikur-hero::after {
@@ -33,13 +41,12 @@ main {
 }
 
 .pedikur-hero .hero-content {
-    position: absolute;
-    bottom: 420px;
-    left: 0;
-    right: 0;
+    /* position: absolute; és a bottom érték TÖRLÉSRE került */
+    position: relative;
     z-index: 10;
     text-align: center;
     padding: 0 20px;
+    width: 100%;
 }
 
 /* --- FEJLÉC --- */
@@ -208,10 +215,12 @@ main {
 
 /* --- RESZPONZÍVITÁS --- */
 
+/* --- RESZPONZÍVITÁS --- */
+
 /* TABLET NÉZET */
 @media (max-width: 992px) {
     .content-container { margin-top: -200px; }
-    .reiki-hero .hero-content { bottom: 350px; }
+    .pedikur-hero { padding-bottom: 200px; } /* Kisebb helyhagyás alul a szövegnek */
     
     /* Itt törjük egymás alá őket, és a kép megy alulra (column-reverse) */
     .card-top-row { 
@@ -229,9 +238,8 @@ main {
 
 /* MOBIL NÉZET */
 @media (max-width: 768px) {
-    .reiki-hero { height: 60vh; }
+    .pedikur-hero { height: 60vh; padding-bottom: 120px; } /* Még kisebb helyhagyás */
     .content-container { margin-top: -120px; }
-    .reiki-hero .hero-content { bottom: 220px; }
     .card-inner { padding: 30px 20px; }
     
     /* Itt is marad a fordított sorrend */

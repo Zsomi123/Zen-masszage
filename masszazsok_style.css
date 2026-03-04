@@ -10,13 +10,19 @@ main {
     height: 75vh;
     min-height: 550px;
     z-index: 1;
-    display: block; 
     overflow: hidden;
-    /* Új sorok a fix háttérképhez: */
+    
+    /* Új szabályok: Háttérkép megfelelő méretezése */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background-attachment: fixed; /* ETTŐL MARAD EGY HELYBEN A KÉP */
+    
+    /* Új szabályok: Flexbox a szöveg rugalmas elrendezéséhez */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 250px; /* Felfelé toljuk picit a szöveget, hogy a kártyák ne takarják ki */
 }
 
 /* Gradiens maszk a hero kép felett */
@@ -26,13 +32,22 @@ main {
     inset: 0;
     /* Lentről (to top) mérjük a pixeleket, így pontosan a felhúzott kártyákhoz igazodik */
     background: linear-gradient(to top, 
-        #F7F5F0 0%,             /* A kép alja (a Talpreflex kártya aljánál) krém színű */
+        #F7F5F0 0%,             /* A kép alja krém színű */
         rgba(247, 245, 240, 0.7) 100px, /* Itt még erősen takar */
-        transparent 250px,      /* Itt kezdődik az áttűnés (kb. a Fej- és Arcmasszázs közepénél) */
+        transparent 250px,      /* Itt kezdődik az áttűnés */
         transparent 100%        /* A felső rész teljesen tiszta marad */
     );
     z-index: 5;
     pointer-events: none;
+}
+
+.masszazs-hero .hero-content {
+    /* position: absolute; és a bottom érték TÖRLÉSRE került */
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    width: 100%;
+    padding: 0 20px;
 }
 
 .masszazs-hero .hero-content {
@@ -293,8 +308,8 @@ main {
     .services-list {
         margin-top: -200px; /* Kicsit feljebb hoztuk */
     }
-    .masszazs-hero .hero-content {
-        bottom: 400px; /* 200px + 50px távolság */
+    .masszazs-hero { 
+        padding-bottom: 200px; /* Kisebb helyhagyás alul a szövegnek */
     }
     .details-image-col {
         flex: 0 0 240px;
@@ -306,15 +321,12 @@ main {
     .masszazs-hero {
         height: 60vh;
         min-height: 450px;
+        padding-bottom: 120px; /* Még kisebb helyhagyás mobilokon */
     }
     
     .services-list {
         margin-top: -120px; /* Ezt is picit feljebb húztuk */
         padding: 0 10px;
-    }
-
-    .masszazs-hero .hero-content {
-        bottom: 250px; /* 120px + 50px távolság */
     }
 
     .list-header {
