@@ -13,6 +13,11 @@ main {
     overflow: hidden;
     background-size: cover;
     background-position: center;
+     /* Új sorok a fix háttérképhez: */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* ETTŐL MARAD EGY HELYBEN A KÉP */
 }
 
 .csontkovacs-hero::after {
