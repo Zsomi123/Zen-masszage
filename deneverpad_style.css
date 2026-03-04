@@ -234,6 +234,17 @@ main {
 
 /* MOBIL NÉZET */
 @media (max-width: 768px) {
+    /* Új szabályok a hős-szekcióhoz, megegyezően a masszázs oldallal */
+    .csontkovacs-hero {
+        height: 60vh;
+        min-height: 450px;
+    }
+    
+    .csontkovacs-hero .hero-content {
+        bottom: 250px; 
+    }
+
+    /* Korábbi szabályaid */
     .content-container { margin-top: -120px; }
     .card-top-row { flex-direction: column; }
     .card-image-col { width: 100%; flex: none; }
