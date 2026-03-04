@@ -949,3 +949,32 @@ footer a:hover {
     
     .scroll-down-indicator { bottom: 80px; }
 }
+
+/* --- MOBIL ÉS iPHONE (iOS) HÁTTÉRKÉP JAVÍTÁS MINDEN OLDALRA --- */
+
+/* 1. Kifejezetten iOS (iPhone/iPad) készülékekre vonatkozó szabály */
+@supports (-webkit-touch-callout: none) {
+    .masszazs-hero,
+    .pedikur-hero,
+    .reiki-hero,
+    .csontkovacs-hero,
+    .deneverpad-hero,
+    .frekvencia-hero,
+    .galeria-hero {
+        background-attachment: scroll !important;
+    }
+}
+
+/* 2. Általános tablet és mobil nézet (992px alatt minden eszközön) */
+@media (max-width: 992px) {
+    .masszazs-hero,
+    .pedikur-hero,
+    .reiki-hero,
+    .csontkovacs-hero,
+    .deneverpad-hero,
+    .frekvencia-hero,
+    .galeria-hero {
+        background-attachment: scroll !important;
+        background-position: center top !important; /* Mobilon jobban mutat, ha a kép tetejére fókuszál */
+    }
+}
