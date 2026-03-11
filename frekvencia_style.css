@@ -336,7 +336,7 @@ main {
 
 /* TABLET NÉZET */
 @media (max-width: 992px) {
-    .content-container { margin-top: -300px; }
+    .content-container { margin-top: -200px; }
     .frekvencia-hero { padding-bottom: 300px; }
     
     .card-top-row { 
