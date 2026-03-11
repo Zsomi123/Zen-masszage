@@ -1,3 +1,11 @@
+/* --- VÁLTOZÓK (Könnyebb karbantartásért) --- */
+:root {
+    --zen-green: #6b8e23;
+    --cream-bg: #F7F5F0;
+    --text-dark: #2c3e50;
+    --text-light: #555;
+}
+
 /* --- ALAPVETŐ BEÁLLÍTÁSOK --- */
 main {
     padding-top: 78px;
@@ -11,6 +19,16 @@ main {
     min-height: 550px;
     z-index: 1;
     overflow: hidden;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    
+    /* Flexbox a szöveg rugalmas elrendezéséhez az abszolút értékek helyett */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    padding-bottom: 350px;
 }
 
 .frekvencia-hero::after {
@@ -18,7 +36,7 @@ main {
     position: absolute;
     inset: 0;
     background: linear-gradient(to top, 
-        #F7F5F0 0%,             
+        var(--cream-bg) 0%,             
         rgba(247, 245, 240, 0.7) 100px, 
         transparent 250px,      
         transparent 100%        
@@ -28,13 +46,12 @@ main {
 }
 
 .frekvencia-hero .hero-content {
-    position: absolute;
-    bottom: 420px; 
-    left: 0;
-    right: 0;
+    position: relative;
     z-index: 10;
     text-align: center;
     padding: 0 20px;
+    width: 100%;
+    animation: fadeIn 1.2s ease-out forwards;
 }
 
 /* --- FEJLÉC ÉS BETŰTÍPUSOK --- */
@@ -71,17 +88,17 @@ main {
     position: absolute;
     width: 12px;
     height: 12px;
-    background-color: #6b8e23;
+    background-color: var(--zen-green);
     border-radius: 50%;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    border: 3px solid #F7F5F0;
+    border: 3px solid var(--cream-bg);
 }
 
 /* --- TARTALMI KÁRTYA --- */
 .section-padding.bg-cream {
-    background-color: #F7F5F0;
+    background-color: var(--cream-bg);
     padding: 60px 0;
 }
 
@@ -98,6 +115,7 @@ main {
     border-radius: 12px;
     box-shadow: 0 15px 40px rgba(0,0,0,0.08);
     overflow: hidden;
+    animation: fadeIn 1s ease-in-out;
 }
 
 .card-inner {
@@ -110,6 +128,7 @@ main {
     margin-bottom: 30px;
 }
 
+/* Ha a jövőben képoszlopot adnál hozzá, itt már kész a reszponzív kódja */
 .card-image-col {
     flex: 0 0 400px;
     position: relative;
@@ -123,26 +142,13 @@ main {
     border-radius: 8px;
 }
 
-.image-badge {
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
-    background: rgba(255,255,255,0.95);
-    padding: 8px 15px;
-    border-radius: 50px;
-    color: #6b8e23;
-    font-weight: 600;
-    font-size: 0.85rem;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-}
-
 .card-text-col {
     flex: 1;
     font-family: 'Montserrat', sans-serif;
 }
 
 .highlight-label {
-    color: #6b8e23;
+    color: var(--zen-green);
     font-weight: 600;
     text-transform: uppercase;
     font-size: 0.85rem;
@@ -155,7 +161,7 @@ main {
     font-family: 'Playfair Display', serif;
     font-size: 2.2rem;
     margin-bottom: 20px;
-    color: #2c3e50;
+    color: var(--text-dark);
     line-height: 1.2;
 }
 
@@ -168,19 +174,14 @@ main {
 
 .card-text-col p {
     line-height: 1.8;
-    color: #555;
+    color: var(--text-light);
     margin-bottom: 15px;
 }
 
-.feature-checklist {
-    list-style: none;
-    padding: 0;
-    margin: 20px 0;
-}
 /* IDÉZET (BLOCKQUOTE) STÍLUS */
 .story-quote {
     background-color: #fcfbf9;
-    border-left: 5px solid #6b8e23;
+    border-left: 5px solid var(--zen-green);
     padding: 25px 30px;
     margin: 35px 0;
     border-radius: 0 8px 8px 0;
@@ -203,8 +204,19 @@ main {
     display: block;
     margin-top: 15px;
     font-style: normal;
-    color: #2c3e50;
+    color: var(--text-dark);
     font-weight: 600;
+}
+
+/* LISTÁK ÉS IKONOK */
+.feature-checklist {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+.clear-floats {
+    clear: both; /* Megakadályozza, hogy a lista a képek mellé csússzon */
 }
 
 .feature-checklist li {
@@ -217,9 +229,9 @@ main {
 }
 
 .feature-checklist i {
-    color: #6b8e23;
+    color: var(--zen-green);
     font-size: 1.1rem;
-    margin-top: 5px; /* Ikont picit lejjebb tolja, hogy egy vonalban legyen a szöveggel */
+    margin-top: 5px; 
 }
 
 /* JOGI NYILATKOZAT DOBOZ */
@@ -269,13 +281,32 @@ main {
 .price-display .amount {
     font-size: 2.2rem;
     font-weight: 700;
-    color: #6b8e23;
+    color: var(--zen-green);
 }
 
 .price-display small {
     font-size: 1rem;
     color: #666;
     font-weight: 400;
+}
+
+/* Footer linkek formázása a HTML inline style-ok helyett */
+.footer-links {
+    margin-bottom: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+}
+
+.footer-links a {
+    color: #888;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: var(--zen-green);
 }
 
 /* --- SZÖVEGBE ÁGYAZOTT KÉPEK (Cikk-szerű elrendezéshez) --- */
@@ -295,26 +326,21 @@ main {
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
-/* Mobilnézeten picit kisebbek lesznek a képek, hogy maradjon hely a szövegnek */
-@media (max-width: 480px) {
-    .inline-img-right {
-        width: 130px;
-        margin-left: 15px;
-    }
-    .inline-img-left {
-        width: 130px;
-        margin-right: 15px;
-    }
+/* --- ANIMÁCIÓK --- */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 /* --- RESZPONZÍV BEÁLLÍTÁSOK --- */
 
+/* TABLET NÉZET */
 @media (max-width: 992px) {
-    .content-container { margin-top: -200px; }
-    .frekvencia-hero .hero-content { bottom: 400px; }
+    .content-container { margin-top: -300px; }
+    .frekvencia-hero { padding-bottom: 300px; }
     
     .card-top-row { 
-        flex-direction: column-reverse; /* Kép kerül alulra */
+        flex-direction: column-reverse; 
         gap: 30px; 
     }
     .card-image-col { 
@@ -326,10 +352,10 @@ main {
     }
 }
 
+/* MOBIL NÉZET */
 @media (max-width: 768px) {
-    .frekvencia-hero { height: 60vh; min-height: 450px; }
+    .frekvencia-hero { height: 60vh; min-height: 450px; padding-bottom: 160px; }
     .content-container { margin-top: -120px; padding: 0 15px; }
-    .frekvencia-hero .hero-content { bottom: 250px; }
     .card-inner { padding: 25px 20px; }
     
     .card-top-row { 
@@ -354,15 +380,16 @@ main {
     .price-display { width: 100%; text-align: center; }
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.hero-content { animation: fadeIn 1.2s ease-out forwards; }
-.static-feature-card { animation: fadeIn 1s ease-in-out; }
-
+/* NAGYON KIS MOBILOK - Szövegközi képek kisebbítése */
 @media (max-width: 480px) {
     .page-header h1 { font-size: 2.2rem; }
-    .frekvencia-hero .hero-content { bottom: 220px; }
+    
+    .inline-img-right {
+        width: 130px;
+        margin-left: 15px;
+    }
+    .inline-img-left {
+        width: 130px;
+        margin-right: 15px;
+    }
 }

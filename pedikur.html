@@ -16,7 +16,7 @@
 <body>
 
     <div class="scroll-progress"></div>
-    <button id="backToTop" title="Vissza a tetejére"><i class="fas fa-chevron-up"></i></button>
+    <button id="backToTop" title="Vissza a tetejére" aria-label="Vissza az oldal tetejére"><i class="fas fa-chevron-up"></i></button>
 
     <nav class="navbar">
         <a href="index.html" class="logo-composite">
@@ -27,7 +27,11 @@
             </div>
         </a>
         <div class="nav-container">
-            <div class="burger"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div>
+            <div class="burger" aria-label="Menü">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
             <ul class="nav-links">
                 <li><a href="index.html">Kezdőlap</a></li>
                 <li><a href="masszazsok.html">Masszázsok</a></li>
@@ -36,9 +40,9 @@
                 <li><a href="index.html#bemutatkozas">Rólunk</a></li>
                 <li><a href="index.html#kapcsolat">Kapcsolat</a></li>
                 <li class="flag-container">
-                    <a href="index_en.html"><img src="https://flagcdn.com/w40/gb.png" alt="English" width="24"></a>
-                    <a href="index_de.html"><img src="https://flagcdn.com/w40/de.png" alt="Deutsch" width="24"></a>
-                    <a href="index_ru.html"><img src="https://flagcdn.com/w40/ru.png" alt="Русский" width="24"></a>
+                    <a href="index_en.html" title="English"><img src="https://flagcdn.com/w40/gb.png" alt="English" width="24" height="18" loading="lazy"></a>
+                    <a href="index_de.html" title="Deutsch"><img src="https://flagcdn.com/w40/de.png" alt="Deutsch" width="24" height="18" loading="lazy"></a>
+                    <a href="index_ru.html" title="Русский"><img src="https://flagcdn.com/w40/ru.png" alt="Русский" width="24" height="18" loading="lazy"></a>
                 </li>
             </ul>
         </div>
@@ -62,7 +66,7 @@
                     <div class="card-inner">
                         <div class="card-top-row">
                             <div class="card-image-col">
-                                <img src="stock_kepek/Stock_4.jpg" alt="Pedikűr szolgáltatás">
+                                <img src="stock_kepek/Stock_4.jpg" alt="Pedikűr szolgáltatás" loading="lazy">
                             </div>
                             <div class="card-text-col">
                                 <span class="highlight-label">Könnyed léptek minden nap</span>
@@ -96,26 +100,55 @@
 
     <footer>
         <div class="container">
-            <p style="margin-bottom: 15px;">
-                <a href="masszazsok.html" style="color: #888; margin-right: 15px; text-decoration: none;">Masszázsok</a>
-                <a href="csontkovacs.html" style="color: #888; margin-right: 15px; text-decoration: none;">Csontkovácsolás</a>
-                <a href="deneverpad.html" style="color: #888; margin-right: 15px; text-decoration: none;">Denevérpad</a>
-                <a href="pedikur.html" style="color: #888; margin-right: 15px; text-decoration: none;">Pedikür</a>
-                <a href="Frekvenciagenerator.html" style="color: #888; margin-right: 15px; text-decoration: none;">Frekvenciagenerator</a>
-                <a href="Rekiki.html" style="color: #888; text-decoration: none;">Reiki kezelés</a>
-            </p>
-            <p>© 2026 Zen Masszázs és Chiropractic Praxis, Hévíz. Minden jog fenntartva. <span class="footer-heart"><i class="fas fa-heart"></i></span></p>
+            <div class="footer-links">
+                <a href="masszazsok.html">Masszázsok</a>
+                <a href="csontkovacs.html">Csontkovácsolás</a>
+                <a href="deneverpad.html">Denevérpad</a>
+                <a href="pedikur.html">Pedikür</a>
+                <a href="Frekvenciagenerator.html">Frekvenciagenerátor</a>
+                <a href="reiki.html">Reiki kezelés</a>
+            </div>
+            <p>© 2026 Zen Masszázs és Chiropractic Praxis, Hévíz. Minden jog fenntartva. <span class="footer-heart"><i class="fas fa-heart" style="color:var(--zen-green);"></i></span></p>
         </div>
     </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // Hamburger menü
             const burger = document.querySelector('.burger');
             const nav = document.querySelector('.nav-links');
-            if (burger) {
+            if (burger && nav) {
                 burger.addEventListener('click', () => {
                     nav.classList.toggle('nav-active');
                     burger.classList.toggle('toggle');
+                });
+            }
+
+            // Görgetősáv és "Vissza a tetejére" gomb logika szinkronizálása
+            const backToTopBtn = document.getElementById('backToTop');
+            const scrollProgress = document.querySelector('.scroll-progress');
+
+            window.addEventListener('scroll', () => {
+                const scrollTop = window.scrollY || document.documentElement.scrollTop;
+                const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                
+                if(scrollProgress && docHeight > 0) {
+                    const scrollPercentage = (scrollTop / docHeight) * 100;
+                    scrollProgress.style.width = scrollPercentage + "%";
+                }
+                
+                if (backToTopBtn) {
+                    if (scrollTop > 300) {
+                        backToTopBtn.classList.add('show');
+                    } else {
+                        backToTopBtn.classList.remove('show');
+                    }
+                }
+            }, { passive: true });
+
+            if(backToTopBtn) {
+                backToTopBtn.addEventListener('click', () => {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
                 });
             }
         });

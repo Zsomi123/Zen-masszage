@@ -1,9 +1,20 @@
+/* --- VÁLTOZÓK (Könnyebb karbantartásért) --- */
+:root {
+    --zen-green: #6b8e23;
+    --cream-bg: #F7F5F0;
+    --text-dark: #2c3e50;
+    --text-light: #555;
+    --warning-red: #e53e3e;
+    --warning-bg: #fff5f5;
+    --warning-text: #712b2b;
+}
+
 /* --- ALAPVETŐ BEÁLLÍTÁSOK --- */
 main {
     padding-top: 78px;
 }
 
-/* --- HERO SZEKCIÓ (CSONTKOVÁCS DESIGN) --- */
+/* --- HERO SZEKCIÓ --- */
 .deneverpad-hero {
     position: relative;
     width: 100%;
@@ -11,15 +22,24 @@ main {
     min-height: 550px;
     z-index: 1;
     overflow: hidden;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    
+    /* Flexbox használata a megbízhatóbb elrendezéshez az abszolút értékek helyett */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* Alulra rendezzük a tartalmat */
+    align-items: center;
+    padding-bottom: 350px; /* Helyet hagyunk a felcsúszó kártyának */
 }
 
 .deneverpad-hero::after {
     content: '';
     position: absolute;
     inset: 0;
-    /* Krém gradiens a kártyához való illeszkedéshez */
     background: linear-gradient(to top, 
-        #F7F5F0 0%,             
+        var(--cream-bg) 0%,             
         rgba(247, 245, 240, 0.7) 100px, 
         transparent 250px,      
         transparent 100%        
@@ -29,13 +49,11 @@ main {
 }
 
 .deneverpad-hero .hero-content {
-    position: absolute;
-    bottom: 420px;
-    left: 0;
-    right: 0;
+    position: relative;
     z-index: 10;
     text-align: center;
     padding: 0 20px;
+    width: 100%;
 }
 
 /* --- FEJLÉC ÉS LOGÓ --- */
@@ -62,12 +80,12 @@ main {
     position: absolute;
     width: 12px;
     height: 12px;
-    background-color: #6b8e23;
+    background-color: var(--zen-green);
     border-radius: 50%;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    border: 3px solid #F7F5F0;
+    border: 3px solid var(--cream-bg);
 }
 
 .logo-stripe-wrapper {
@@ -76,7 +94,7 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 10px auto; /* Csökkentett margó a pontos illeszkedéshez */
+    margin: 10px auto;
 }
 
 .logo-stripe-wrapper::before {
@@ -92,7 +110,7 @@ main {
 }
 
 .hero-logo-img {
-    max-width: 450px; /* Picit kisebbre véve, hogy arányos legyen egy H1-gyel */
+    max-width: 450px;
     width: 90%;
     height: auto;
     display: block;
@@ -105,7 +123,7 @@ main {
 
 /* --- TARTALMI KÁRTYA --- */
 .section-padding.bg-cream {
-    background-color: #F7F5F0;
+    background-color: var(--cream-bg);
     padding: 60px 0;
 }
 
@@ -153,7 +171,7 @@ main {
 }
 
 .highlight-label {
-    color: #6b8e23;
+    color: var(--zen-green);
     font-weight: 600;
     text-transform: uppercase;
     font-size: 0.85rem;
@@ -165,12 +183,12 @@ main {
     font-family: 'Playfair Display', serif;
     font-size: 2.2rem;
     margin-bottom: 20px;
-    color: #2c3e50;
+    color: var(--text-dark);
 }
 
 .card-text-col p {
     line-height: 1.8;
-    color: #555;
+    color: var(--text-light);
     margin-bottom: 15px;
 }
 
@@ -182,14 +200,15 @@ main {
 
 .feature-checklist li {
     display: flex;
-    align-items: center;
+    align-items: flex-start; /* Hosszabb szövegek esetén az ikon felül marad */
     gap: 12px;
     margin-bottom: 12px;
     color: #444;
 }
 
 .feature-checklist i {
-    color: #6b8e23;
+    color: var(--zen-green);
+    margin-top: 4px; /* Finomhangolás az align-items: flex-start miatt */
 }
 
 /* --- ÁRAZÁS ÉS GOMB --- */
@@ -211,7 +230,7 @@ main {
 .price-display .amount {
     font-size: 2.2rem;
     font-weight: 700;
-    color: #6b8e23;
+    color: var(--zen-green);
 }
 
 .price-display small {
@@ -221,8 +240,8 @@ main {
 }
 
 .contraindications-box {
-    background-color: #fff5f5;
-    border-left: 4px solid #e53e3e;
+    background-color: var(--warning-bg);
+    border-left: 4px solid var(--warning-red);
     padding: 20px;
     margin: 30px 0;
     border-radius: 8px;
@@ -237,9 +256,28 @@ main {
 
 .contraindications-box p {
     font-size: 0.9rem;
-    color: #712b2b;
+    color: var(--warning-text);
     line-height: 1.6;
     margin: 0;
+}
+
+/* Footer linkek formázása a HTML inline style-ok helyett */
+.footer-links {
+    margin-bottom: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+}
+
+.footer-links a {
+    color: #888;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: var(--zen-green);
 }
 
 /* --- ANIMÁCIÓ --- */
@@ -256,8 +294,8 @@ main {
 
 /* TABLET NÉZET */
 @media (max-width: 992px) {
-    .content-container { margin-top: -200px; }
-    .deneverpad-hero .hero-content { bottom: 400px; }
+    .content-container { margin-top: -300px; }
+    .deneverpad-hero { padding-bottom: 300px; }
     
     .card-top-row { 
         flex-direction: column-reverse; /* Kép kerül alulra */
@@ -274,9 +312,8 @@ main {
 
 /* MOBIL NÉZET */
 @media (max-width: 768px) {
-    .deneverpad-hero { height: 60vh; min-height: 450px; }
+    .deneverpad-hero { height: 60vh; min-height: 450px; padding-bottom: 150px; }
     .content-container { margin-top: -120px; padding: 0 15px; }
-    .deneverpad-hero .hero-content { bottom: 250px; }
     .card-inner { padding: 25px 20px; }
     
     .card-top-row { 
@@ -288,8 +325,8 @@ main {
         flex: none; 
     }
     .card-image-col img { 
-        min-height: 250px; 
-        height: 250px; 
+        min-height: auto; 
+        aspect-ratio: 4/3; /* Fix magasság helyett arányos méretezés */
         object-fit: cover;
     }
     .card-footer-price { 
@@ -302,5 +339,5 @@ main {
 
 /* NAGYON KIS MOBILOK */
 @media (max-width: 480px) {
-    .deneverpad-hero .hero-content { bottom: 220px; }
+    .hero-logo-img { width: 95%; }
 }
